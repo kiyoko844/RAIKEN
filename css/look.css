@@ -1,0 +1,452 @@
+/* RAIKEN · окно «Оформление»: темы, рамки, фон */
+#mo.look-mo {
+	background: rgb(var(--c0) / 0.6);
+}
+.md.look-md {
+	width: min(1120px, 100%);
+	max-height: 92vh;
+	padding: 0;
+	overflow: auto;
+}
+.look {
+	display: grid;
+	grid-template-columns: 260px minmax(0, 1fr);
+	min-height: min(640px, 86vh);
+}
+.look-pv {
+	display: grid;
+	align-content: start;
+	justify-items: center;
+	gap: 8px;
+	padding: 28px 18px 20px;
+	border-right: 1px solid var(--ln);
+	background:
+		radial-gradient(
+			260px 220px at 50% 22%,
+			rgb(var(--c1) / 0.18),
+			transparent 72%
+		),
+		rgb(var(--c0) / 0.35);
+}
+.look-stage .avs {
+	--w: 190px;
+}
+.look-name {
+	margin-top: 4px;
+	font: 800 22px var(--h);
+}
+.look-sub {
+	color: var(--t2);
+	font: 400 12px var(--m);
+	text-align: center;
+}
+.look-sw {
+	display: flex;
+	gap: 6px;
+	margin-top: 4px;
+}
+.look-sw i {
+	width: 26px;
+	height: 8px;
+	border-radius: 6px;
+}
+.look-main {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	min-height: 0;
+}
+.look-head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 22px 24px 8px;
+}
+.look-head h3 {
+	margin: 4px 0 0;
+	font: 800 24px var(--h);
+}
+.look-tabs {
+	display: flex;
+	gap: 4px;
+	margin: 6px 24px 0;
+	padding: 4px;
+	width: fit-content;
+	border-radius: 14px;
+	border: 1px solid var(--ln);
+	background: rgb(255 255 255 / 0.02);
+}
+.look-tabs button {
+	padding: 8px 18px;
+	border: 0;
+	border-radius: 10px;
+	background: none;
+	color: var(--t2);
+	font: 600 13px var(--b);
+	transition:
+		color 0.2s,
+		background 0.25s,
+		transform 0.35s var(--ease);
+}
+.look-tabs button:hover {
+	color: var(--i3);
+	background: rgb(var(--c2) / 0.08);
+	transform: translateY(-1px);
+}
+.look-tabs button.on {
+	background: var(--g);
+	color: rgb(var(--ck));
+}
+.look-body {
+	flex: 1;
+	min-height: 0;
+	overflow: auto;
+	padding: 18px 24px 24px;
+	scrollbar-width: thin;
+}
+.look-check {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 14px;
+	color: var(--t2);
+	font: 500 13px var(--b);
+	cursor: pointer;
+}
+.look-check input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+.look-check span {
+	position: relative;
+	width: 38px;
+	height: 22px;
+	border-radius: 99px;
+	border: 1px solid var(--ln);
+	background: rgb(255 255 255 / 0.05);
+	transition:
+		background 0.25s,
+		border-color 0.25s;
+}
+.look-check span::after {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: var(--t2);
+	transition:
+		transform 0.35s var(--ease),
+		background 0.25s;
+}
+.look-check input:checked + span {
+	background: rgb(var(--c1) / 0.3);
+	border-color: var(--i1);
+}
+.look-check input:checked + span::after {
+	transform: translateX(16px);
+	background: var(--i2);
+}
+.look-check input:disabled + span {
+	opacity: 0.4;
+}
+.look-check input:focus-visible + span {
+	box-shadow: 0 0 0 3px rgb(var(--c1) / 0.3);
+}
+
+/* карточки тем */
+.th-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 12px;
+}
+.th-card {
+	position: relative;
+	display: grid;
+	grid-template-columns: 46px minmax(0, 1fr);
+	gap: 12px;
+	align-items: center;
+	padding: 14px 14px 18px;
+	border-radius: 16px;
+	border: 1px solid var(--ln);
+	background: linear-gradient(
+		135deg,
+		rgb(var(--p1) / 0.14),
+		rgb(var(--p0) / 0.9) 70%
+	);
+	color: var(--tx);
+	text-align: left;
+	overflow: hidden;
+	transition:
+		transform 0.5s var(--ease),
+		border-color 0.25s,
+		box-shadow 0.4s;
+}
+.th-card:hover {
+	transform: translateY(-4px);
+	border-color: rgb(var(--p2) / 0.7);
+	box-shadow: 0 18px 40px -20px rgb(var(--p1) / 0.7);
+}
+.th-card.on {
+	border-color: rgb(var(--p1));
+	box-shadow:
+		0 0 0 1px rgb(var(--p1) / 0.6),
+		0 18px 44px -22px rgb(var(--p1) / 0.8);
+}
+.th-ico {
+	display: grid;
+	place-items: center;
+	width: 46px;
+	height: 46px;
+	border-radius: 14px;
+	background: rgb(var(--p1) / 0.18);
+	border: 1px solid rgb(var(--p2) / 0.4);
+	color: rgb(var(--p2));
+}
+.th-ico svg {
+	width: 24px;
+	height: 24px;
+}
+.th-txt {
+	display: grid;
+	gap: 2px;
+	min-width: 0;
+}
+.th-txt b {
+	font: 800 16px var(--h);
+}
+.th-txt small {
+	color: rgb(var(--p2) / 0.85);
+	font: 400 11.5px var(--m);
+}
+.th-txt em {
+	color: var(--t2);
+	font: 500 12px var(--b);
+	font-style: normal;
+}
+.th-bar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	height: 5px;
+}
+.th-bar i {
+	flex: 1;
+}
+.th-bar i:nth-child(1) {
+	background: rgb(var(--p0));
+}
+.th-bar i:nth-child(2) {
+	background: rgb(var(--p1));
+}
+.th-bar i:nth-child(3) {
+	background: rgb(var(--p2));
+}
+.th-on {
+	position: absolute;
+	bottom: 12px;
+	right: 12px;
+	padding: 2px 9px;
+	border-radius: 99px;
+	background: rgb(var(--p1));
+	color: rgb(var(--p0));
+	font: 700 10.5px var(--m);
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+/* рамки */
+.fr-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 14px;
+}
+.fr-chips button {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 7px 13px;
+	border-radius: 99px;
+	border: 1px solid var(--ln);
+	background: rgb(255 255 255 / 0.02);
+	color: var(--t2);
+	font: 600 12px var(--b);
+	transition:
+		color 0.2s,
+		background 0.25s,
+		border-color 0.2s,
+		transform 0.35s var(--ease);
+}
+.fr-chips button b {
+	color: var(--tx);
+	font: 500 11px var(--m);
+	opacity: 0.7;
+}
+.fr-chips button:hover {
+	color: var(--i3);
+	border-color: rgb(var(--c2) / 0.5);
+	transform: translateY(-1px);
+}
+.fr-chips button.on {
+	color: var(--i3);
+	border-color: var(--i1);
+	background: rgb(var(--c1) / 0.16);
+}
+.frame-picker {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 12px;
+}
+.frame-option {
+	position: relative;
+	display: grid;
+	grid-template-columns: 96px 1fr 22px;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 14px 8px 8px;
+	border-radius: 16px;
+	border: 1px solid var(--ln);
+	background: rgb(255 255 255 / 0.02);
+	color: var(--tx);
+	text-align: left;
+	overflow: hidden;
+	transition:
+		transform 0.45s var(--ease),
+		border-color 0.25s,
+		box-shadow 0.35s,
+		background 0.25s;
+}
+.frame-option > span:nth-child(2) b {
+	display: block;
+	font: 700 14px var(--h);
+}
+.frame-option small {
+	display: block;
+	margin-top: 3px;
+	color: var(--t2);
+	font-size: 11.5px;
+	line-height: 1.35;
+}
+.frame-option:hover {
+	transform: translateY(-4px);
+	border-color: rgb(var(--c2) / 0.55);
+	box-shadow: 0 16px 38px -16px var(--glow);
+}
+.frame-option.selected {
+	border-color: var(--i1);
+	background: rgb(var(--c1) / 0.09);
+}
+.frame-check {
+	color: var(--i2);
+	font-weight: 800;
+}
+.frame-preview {
+	display: block;
+}
+.avs.mini {
+	--w: 86px;
+}
+
+/* фон */
+.look-bgcard {
+	display: grid;
+	gap: 4px;
+	max-width: 520px;
+	padding: 18px 20px;
+	border-radius: 16px;
+	border: 1px solid var(--ln);
+	background: rgb(255 255 255 / 0.025);
+}
+.look-bgcard .m {
+	margin: 0 0 10px;
+}
+.look-hint {
+	margin-top: 12px !important;
+}
+.look-seg {
+	display: inline-flex;
+	gap: 4px;
+	width: fit-content;
+	padding: 4px;
+	border-radius: 12px;
+	border: 1px solid var(--ln);
+	background: rgb(255 255 255 / 0.02);
+}
+.look-seg button {
+	padding: 8px 16px;
+	border: 0;
+	border-radius: 9px;
+	background: none;
+	color: var(--t2);
+	font: 600 12.5px var(--b);
+	transition:
+		color 0.2s,
+		background 0.25s;
+}
+.look-seg button:hover:not(:disabled) {
+	color: var(--i3);
+	background: rgb(var(--c2) / 0.08);
+}
+.look-seg button.on {
+	background: var(--g);
+	color: rgb(var(--ck));
+}
+.look-seg button:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+/* чип темы в шапке */
+.look-chip {
+	color: var(--i3);
+	border-color: rgb(var(--c2) / 0.35);
+}
+.look-dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: var(--g);
+	box-shadow: 0 0 10px var(--glow);
+}
+
+@media (max-width: 860px) {
+	.look {
+		grid-template-columns: 1fr;
+	}
+	.look-pv {
+		grid-template-columns: auto 1fr;
+		justify-items: start;
+		align-items: center;
+		gap: 4px 16px;
+		padding: 16px;
+		border-right: 0;
+		border-bottom: 1px solid var(--ln);
+	}
+	.look-stage {
+		grid-row: 1 / span 3;
+	}
+	.look-stage .avs {
+		--w: 110px;
+	}
+	.look-head,
+	.look-tabs,
+	.look-body {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+	.look-tabs {
+		margin-left: 16px;
+		margin-right: 16px;
+	}
+	.th-grid,
+	.frame-picker {
+		grid-template-columns: 1fr;
+	}
+}

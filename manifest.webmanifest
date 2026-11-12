@@ -1,0 +1,15 @@
+{
+	"name": "RAIKEN — Personal Progression System",
+	"short_name": "RAIKEN",
+	"description": "Личная система прогресса, дисциплины и достижений",
+	"start_url": "./index.html",
+	"scope": "./",
+	"display": "standalone",
+	"background_color": "#05080d",
+	"theme_color": "#05080d",
+	"lang": "ru",
+	"icons": [
+		{ "src": "icons/app-192.png", "sizes": "192x192", "type": "image/png" },
+		{ "src": "icons/app-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+	]
+}

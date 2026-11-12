@@ -1,0 +1,175 @@
+/* RAIKEN · рамки аватара: слои кольца, вода, лепестки, искры и палитры.
+   Рамка — отдельный слой над фото: двигаются только transform/opacity. */
+
+/* ---------- Аватар и рамки: вода стекает с кольца ---------- */
+.avs {
+	--w: 200px;
+	--u: calc(var(--w) / 200);
+	position: relative;
+	flex: none;
+	width: var(--w);
+	height: calc(var(--w) * 1.35);
+	--ring: conic-gradient(#8fa3b3, #eaf3fa, #6c7f8f, #c7d6e2, #8fa3b3);
+	--w1: #9fd0ea;
+	--glow2: rgba(130, 180, 220, 0.28);
+	--spin: 20s;
+}
+.av2 {
+	position: absolute;
+	left: 8.5%;
+	top: 6.3%;
+	width: 83%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	overflow: hidden;
+	padding: 0;
+	border: 0;
+	display: grid;
+	place-items: center;
+	background: radial-gradient(circle at 35% 25%, hsl(calc(var(--hue-s) + 1) calc(36.2% * var(--sat-s)) 13.5%), hsl(var(--hue-s) calc(46.7% * var(--sat-s)) 5.9%));
+	color: var(--i2);
+	font: 800 calc(var(--w) * 0.32) var(--h);
+	z-index: 3;
+	cursor: pointer;
+}
+.av2 img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
+.av2:hover img { transform: scale(1.07); }
+.av2 i { position: absolute; inset: 0; display: grid; place-items: center; background: rgb(var(--c0) / 0.55); color: #fff; opacity: 0; transition: opacity 0.3s; }
+.av2:hover i { opacity: 1; }
+.avs.mini .av2 i { display: none; }
+.fr-ring, .fr-sheen {
+	position: absolute;
+	left: 4%;
+	top: 2.96%;
+	width: 92%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--u) * 6.6), #000 calc(100% - var(--u) * 6px));
+	mask: radial-gradient(farthest-side, transparent calc(100% - var(--u) * 6.6), #000 calc(100% - var(--u) * 6px));
+	pointer-events: none;
+}
+.fr-ring { background: var(--ring); animation: ice-spin var(--spin) linear infinite; z-index: 1; }
+.fr-sheen { background: conic-gradient(from 0deg, transparent 0 78%, rgba(255, 255, 255, 0.95) 88%, transparent 95%); animation: ice-spin 5.5s linear infinite; z-index: 2; }
+.fr-halo {
+	position: absolute;
+	left: 4%;
+	top: 2.96%;
+	width: 92%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	box-shadow: 0 0 calc(var(--u) * 34) var(--glow2), inset 0 0 calc(var(--u) * 20) var(--glow2);
+	animation: ice-pulse 4.6s ease-in-out infinite;
+	pointer-events: none;
+	z-index: 0;
+}
+.fr-fx { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 2; }
+.fr-tr { fill: none; stroke: var(--w1); stroke-width: var(--sw, 3.4); stroke-linecap: round; opacity: 0.2; }
+.fr-fl { fill: none; stroke: var(--w1); stroke-width: var(--sw, 3.4); stroke-linecap: round; stroke-dasharray: 24 76; stroke-dashoffset: 22; animation: ice-flow var(--t) cubic-bezier(0.4, 0, 0.6, 1) infinite; animation-delay: var(--d); }
+.fr-dp { fill: var(--w1); opacity: 0; transform-box: fill-box; transform-origin: center; animation: ice-drop var(--t) ease-in infinite; animation-delay: var(--d); }
+.fr-ic { fill: rgba(224, 246, 255, 0.82); stroke: rgba(159, 216, 242, 0.95); stroke-width: 0.6; transform-box: fill-box; transform-origin: 50% 0; animation: ice-ic 4.8s ease-in-out infinite; animation-delay: var(--d); }
+.fr-arc { fill: none; stroke: #d7ecff; stroke-width: 1.9; stroke-linejoin: bevel; stroke-linecap: round; opacity: 0; animation: ice-arc var(--t) steps(1, end) infinite; animation-delay: var(--d); }
+.fr-cr { fill: #eaffff; opacity: 0; transform-box: fill-box; transform-origin: center; animation: ice-cr 7.5s ease-in-out infinite; animation-delay: var(--d); }
+.fr-orbit { fill: none; stroke: var(--w1); stroke-width: 1.5; stroke-dasharray: 2 7 20 7; transform-origin: 100px 100px; opacity: 0.85; }
+.fr-orbit.o1 { animation: ice-spin 16s linear infinite; }
+.fr-orbit.o2 { animation: ice-spin 10s linear infinite reverse; stroke-dasharray: 1 6 12 6; opacity: 0.6; }
+.fr-wave { fill: none; stroke: #c4f6ff; stroke-width: 3.4; stroke-linecap: round; stroke-dasharray: 9 41; transform: rotate(-90deg); transform-origin: 100px 100px; animation: ice-crest 5.2s linear infinite; }
+
+/* палитры рамок */
+.fr-classic { --ring: conic-gradient(#8fa3b3, #eaf3fa, #6c7f8f, #c7d6e2, #8fa3b3); --w1: #9fd0ea; --glow2: rgba(130, 180, 220, 0.28); --spin: 24s; }
+.fr-gold { --ring: conic-gradient(#fff1b8, #b98a3a, #fff6d4, #a77428, #fff1b8); --w1: #ffd77a; --glow2: rgba(240, 190, 90, 0.42); --spin: 16s; }
+.fr-aurora { --ring: conic-gradient(#5ef2d6, #6e8bff, #c58bff, #5ef2d6); --w1: #7fffe4; --glow2: rgba(110, 160, 255, 0.4); --spin: 9s; }
+.fr-crimson { --ring: conic-gradient(#ff9a9a, #8f1d38, #ff5a6a, #4a0d1c, #ff9a9a); --w1: #ff6b7b; --glow2: rgba(220, 50, 80, 0.42); --spin: 18s; }
+.fr-ice { --ring: conic-gradient(#ffffff, #9fe2ff, #4fb3e6, #e8fbff, #ffffff); --w1: #a8e6ff; --glow2: rgba(100, 210, 255, 0.5); --spin: 14s; }
+.fr-royal { --ring: conic-gradient(#e9d4ff, #7a4bd8, #ffd88a, #5e34b8, #e9d4ff); --w1: #c9a8ff; --glow2: rgba(150, 100, 255, 0.42); --spin: 15s; }
+.fr-glacier { --ring: conic-gradient(#ffffff, #7fd8ff, #1f6c99, #bfeaff, #ffffff); --w1: #8fdcff; --glow2: rgba(79, 179, 230, 0.55); --spin: 12s; }
+.fr-tidal { --ring: conic-gradient(#3ad0ff, #0a6ea8, #8ff0ff, #0a4f85, #3ad0ff); --w1: #55d6ff; --glow2: rgba(40, 170, 255, 0.5); --spin: 18s; }
+.fr-bolt { --ring: conic-gradient(#cfe9ff, #2e8bff, #ffffff, #1b4fd6, #cfe9ff); --w1: #7db8ff; --glow2: rgba(70, 140, 255, 0.55); --spin: 7s; }
+.fr-bloom { --ring: conic-gradient(#ffffff, #c9efff, #7ec9f2, #ffffff); --w1: #d6f3ff; --glow2: rgba(190, 235, 255, 0.5); --spin: 26s; }
+.fr-rift { --ring: conic-gradient(#2b1458, #9b5cff, #12082e, #6a3bd1, #2b1458); --w1: #a77bff; --glow2: rgba(120, 70, 220, 0.5); --spin: 20s; }
+.fr-prism { --ring: conic-gradient(#ff9ad5, #7ce7ff, #ffe68a, #9d8cff, #ff9ad5); --w1: #bfeaff; --glow2: rgba(160, 200, 255, 0.45); --spin: 12s; }
+
+@keyframes ice-spin { to { transform: rotate(360deg); } }
+@keyframes ice-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes ice-flow { from { stroke-dashoffset: 24; } to { stroke-dashoffset: -76; } }
+@keyframes ice-drop { 0%, 64% { opacity: 0; transform: translateY(-2px) scale(0.3); } 74% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(30px) scale(0.55); } }
+@keyframes ice-ic { 0%, 100% { transform: scaleY(0.9); } 50% { transform: scaleY(1.06); } }
+@keyframes ice-arc { 0% { opacity: 0; } 6% { opacity: 1; } 9% { opacity: 0.15; } 13% { opacity: 1; } 20% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes ice-cr { 0% { opacity: 0; transform: scale(0.2) rotate(0); } 14% { opacity: 1; transform: scale(1.15) rotate(12deg); } 50% { opacity: 1; transform: scale(1) rotate(0); } 86% { opacity: 0; transform: scale(0.5) rotate(-10deg); } 100% { opacity: 0; } }
+@keyframes ice-crest { to { stroke-dashoffset: -100; } }
+
+/* паузы: вне экрана, в фоновой вкладке, превью в окне выбора */
+.avs.is-off *, .tab-off .avs *, .tab-off .dk-bar i::after { animation-play-state: paused !important; }
+.frame-option:not(:hover):not(.selected) .avs * { animation-play-state: paused !important; }
+
+
+/* ---------- Новые эффекты ---------- */
+.avs { --w2: #ffffff; --pt: var(--w1); --lf1: #7bd16a; --lf2: #f59e0b; --lt: rgba(225, 29, 72, 0.38); }
+.fr-spin { transform-origin: 100px 100px; animation: ice-spin var(--t, 16s) linear infinite; animation-delay: var(--d, 0s); animation-direction: var(--dir, normal); }
+.fr-pt { fill: var(--pt); opacity: 0.92; transform-box: fill-box; transform-origin: center; animation: ice-tumble var(--tm, 3.4s) ease-in-out infinite alternate; animation-delay: var(--dl, 0s); }
+.fr-lf { transform-box: fill-box; transform-origin: center; animation: ice-tumble var(--tm, 3s) ease-in-out infinite alternate; animation-delay: var(--dl, 0s); }
+.fr-lf.l1 { fill: var(--lf1); }
+.fr-lf.l2 { fill: var(--lf2); }
+.fr-sn { fill: var(--w1); opacity: 0.9; }
+.fr-fall { animation: ice-fall var(--t, 4s) linear infinite; animation-delay: var(--d, 0s); }
+.fr-sway { animation: ice-sway var(--ts, 2.4s) ease-in-out infinite alternate; }
+.fr-rise { animation: ice-rise var(--t, 3s) ease-out infinite; animation-delay: var(--d, 0s); }
+.fr-em { fill: var(--w1); }
+.fr-bw { fill: var(--w1); fill-opacity: 0.82; stroke: var(--w2); stroke-width: 0.4; transform-box: fill-box; animation: ice-flap var(--fl, 0.45s) ease-in-out infinite alternate; }
+.fr-bw.bl { transform-origin: right center; }
+.fr-bw.br { transform-origin: left center; }
+.fr-sh { fill: var(--w2); fill-opacity: 0.85; stroke: var(--w1); stroke-width: 0.6; transform-box: fill-box; transform-origin: center; animation: ice-tumble var(--tm, 3s) ease-in-out infinite alternate; animation-delay: var(--dl, 0s); }
+.fr-lt { fill: var(--lt); stroke: var(--w1); stroke-width: 0.5; }
+.fr-sq { fill: none; stroke: var(--w1); stroke-width: 1.3; stroke-dasharray: 3 5; transform-origin: 100px 100px; opacity: 0.85; }
+.fr-sq.q1 { animation: ice-spin 24s linear infinite; }
+.fr-sq.q2 { animation: ice-spin 30s linear infinite reverse; animation-delay: -3.75s; }
+.fr-tk { fill: none; stroke: var(--w1); transform-origin: 100px 100px; }
+.fr-tk.t1 { animation: ice-spin 44s linear infinite; opacity: 0.85; }
+.fr-tk.t2 { animation: ice-spin 30s linear infinite reverse; opacity: 0.65; stroke: var(--w2); }
+.fr-ck { fill: none; stroke: var(--w1); stroke-linecap: round; transform-origin: 100px 100px; animation: ice-spin 70s linear infinite, ice-flick 2.4s ease-in-out infinite; }
+.fr-sp { fill: none; stroke: var(--w1); stroke-linecap: round; transform-origin: 100px 100px; }
+.fr-sp.s1 { animation: ice-spin 2.4s linear infinite; }
+.fr-sp.s2 { animation: ice-spin 3.2s linear infinite reverse; stroke: var(--w2); }
+.fr-sp.s3 { animation: ice-spin 4.6s linear infinite; }
+.fr-sp.s4 { animation: ice-spin 1.9s linear infinite reverse; stroke: var(--w2); }
+.fr-sk { fill: none; stroke: var(--w1); stroke-linecap: round; transform-origin: 100px 100px; }
+.fr-sk.k1 { animation: ice-spin 2.1s linear infinite; }
+.fr-sk.k2 { animation: ice-spin 3.3s linear infinite reverse; stroke: var(--w2); }
+.fr-orbit.o3 { stroke-dasharray: 1 5 10 5; animation: ice-spin 40s linear infinite; opacity: 0.7; }
+.fr-halo2 { position: absolute; left: -5%; top: -3.7%; width: 110%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, transparent 56%, var(--glow2) 64%, transparent 74%); opacity: 0.7; animation: ice-pulse 3.2s ease-in-out infinite; pointer-events: none; z-index: 0; }
+@keyframes ice-tumble { from { transform: rotate(-38deg) scaleX(1); } to { transform: rotate(42deg) scaleX(0.45); } }
+@keyframes ice-fall { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateY(var(--L, 60px)); opacity: 0; } }
+@keyframes ice-sway { from { transform: translateX(calc(var(--a, 4) * -1px)); } to { transform: translateX(calc(var(--a, 4) * 1px)); } }
+@keyframes ice-rise { 0% { transform: translateY(0) scale(1); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(calc(var(--H, 50) * -1px)) scale(0.3); opacity: 0; } }
+@keyframes ice-flap { from { transform: scaleX(1); } to { transform: scaleX(0.18); } }
+@keyframes ice-flick { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+/* ---------- Палитры персонажей ---------- */
+.fr-shirayuki { --ring: conic-gradient(#ffffff, #d9f0ff, #9fd8f2, #f2fbff, #ffffff); --w1: #e8f6ff; --glow2: rgba(190, 230, 255, 0.5); --spin: 22s; }
+.fr-tsukishiro { --ring: conic-gradient(#e8fbff, #7fd8ff, #bfeaff, #4fb3e6, #e8fbff); --w1: #bfeaff; --w2: #7fd8ff; --glow2: rgba(120, 210, 255, 0.5); --spin: 16s; }
+.fr-hakka { --ring: conic-gradient(#9fe9ff, #1f9fd0, #e0fbff, #176f9a, #9fe9ff); --w1: #8fe3ff; --glow2: rgba(70, 200, 255, 0.55); --spin: 11s; }
+.fr-senbonzakura { --ring: conic-gradient(#ffd0e6, #f472b6, #fff0f7, #c0267c, #ffd0e6); --pt: #ffb7d5; --w1: #ff9ac8; --glow2: rgba(244, 114, 182, 0.45); --spin: 20s; }
+.fr-sakurafall { --ring: conic-gradient(#ffc2de, #e8579e, #ffdcec, #b02470, #ffc2de); --pt: #ffa8cc; --w1: #ffa8cc; --glow2: rgba(244, 114, 182, 0.4); --spin: 26s; }
+.fr-gokei { --ring: conic-gradient(#f9a8d4, #9d174d, #fbcfe8, #6b21a8, #f9a8d4); --w1: #f472b6; --glow2: rgba(200, 80, 170, 0.45); --spin: 14s; }
+.fr-minazuki { --ring: conic-gradient(#ff6b7e, #6b0f23, #ff3b57, #2b0610, #ff6b7e); --w1: #d11a3c; --glow2: rgba(190, 20, 50, 0.55); --spin: 20s; --sw: 4.6; }
+.fr-bloodlotus { --ring: conic-gradient(#fda4af, #9f1239, #fecdd3, #4c0519, #fda4af); --w1: #e11d48; --lt: rgba(225, 29, 72, 0.38); --glow2: rgba(225, 29, 72, 0.5); --spin: 30s; --sw: 4; }
+.fr-benihime { --ring: conic-gradient(#bbf7d0, #10b981, #ecfdf5, #047857, #bbf7d0); --w1: #6ee7b7; --glow2: rgba(52, 211, 153, 0.5); --spin: 12s; }
+.fr-kannon { --ring: conic-gradient(#ecfdf5, #34d399, #a7f3d0, #064e3b, #ecfdf5); --w1: #a7f3d0; --w2: #34d399; --glow2: rgba(52, 211, 153, 0.4); --spin: 18s; }
+.fr-kyoka { --ring: conic-gradient(#e9d5ff, #8b5cf6, #fafaff, #5b21b6, #e9d5ff); --w1: #c4b5fd; --w2: #ffffff; --glow2: rgba(167, 139, 250, 0.5); --spin: 15s; }
+.fr-hogyoku { --ring: conic-gradient(#f5f3ff, #a78bfa, #6d28d9, #ddd6fe, #f5f3ff); --w1: #a78bfa; --w2: #ede9fe; --glow2: rgba(139, 92, 246, 0.55); --spin: 9s; }
+.fr-rasengan { --ring: conic-gradient(#ffffff, #38bdf8, #e0f2fe, #0ea5e9, #ffffff); --w1: #e0f2fe; --w2: #38bdf8; --glow2: rgba(56, 189, 248, 0.55); --spin: 3.2s; }
+.fr-kurama { --ring: conic-gradient(#fde68a, #f97316, #ef4444, #fb923c, #fde68a); --w1: #fb923c; --glow2: rgba(249, 115, 22, 0.6); --spin: 10s; }
+.fr-hokage { --ring: conic-gradient(#fed7aa, #ea580c, #fff7ed, #9a3412, #fed7aa); --w1: #fdba74; --glow2: rgba(249, 115, 22, 0.45); --spin: 22s; }
+.fr-brand { --ring: conic-gradient(#3a0a0a, #b91c1c, #111111, #ef4444, #3a0a0a); --w1: #f87171; --glow2: rgba(220, 38, 38, 0.55); --spin: 28s; }
+.fr-berserk { --ring: conic-gradient(#d6d3d1, #57534e, #f5f5f4, #292524, #d6d3d1); --w1: #b91c1c; --glow2: rgba(185, 28, 28, 0.45); --spin: 34s; --sw: 4.2; }
+.fr-shunko { --ring: conic-gradient(#fef08a, #eab308, #ffffff, #ca8a04, #fef08a); --w1: #fde047; --glow2: rgba(250, 204, 21, 0.55); --spin: 5s; }
+.fr-flashstep { --ring: conic-gradient(#c4b5fd, #7c3aed, #fde047, #4c1d95, #c4b5fd); --w1: #fde047; --w2: #a78bfa; --glow2: rgba(167, 139, 250, 0.5); --spin: 7s; }
+
+.fr-getsuga { --ring:conic-gradient(#fff1ed,#ef4444,#25070d,#ff9b83,#fff1ed); --w1:#ff6b65; --w2:#ffe0d8; --glow2:rgba(239,68,68,.58); --spin:5s; }
+.fr-bankai { --ring:conic-gradient(#ffb4a6,#7f1d1d,#160609,#ef4444,#ffb4a6); --w1:#ef4444; --w2:#ffb4a6; --glow2:rgba(190,24,44,.58); --spin:18s; }
+.fr-hollow { --ring:conic-gradient(#fff,#cbd5e1,#ef4444,#292524,#fff); --w1:#fca5a5; --w2:#f8fafc; --glow2:rgba(255,255,255,.38); --spin:11s; }
+.fr-nozarashi { --ring:conic-gradient(#fca5a5,#7f1d1d,#170609,#dc2626,#fca5a5); --w1:#ef4444; --w2:#fecaca; --glow2:rgba(220,38,38,.62); --spin:25s; }
+.fr-eyepatch { --ring:conic-gradient(#fecaca,#450a0a,#171717,#991b1b,#fecaca); --w1:#f87171; --w2:#d6d3d1; --glow2:rgba(185,28,28,.48); --spin:32s; }
+.fr-berserker { --ring:conic-gradient(#fff,#b91c1c,#292524,#f97316,#fff); --w1:#fb7185; --w2:#fdba74; --glow2:rgba(239,68,68,.56); --spin:8s; }
+.fr-katen { --ring:conic-gradient(#fbcfe8,#9f1239,#24101b,#e8799c,#fbcfe8); --w1:#e8a0b2; --w2:#fce7f3; --glow2:rgba(190,82,112,.48); --spin:24s; }
+.fr-shadowgame { --ring:conic-gradient(#f5d0dc,#6b273d,#100b12,#9f4561,#f5d0dc); --w1:#c08497; --w2:#f3d6df; --glow2:rgba(120,45,75,.5); --spin:36s; }
+.fr-blossom { --ring:conic-gradient(#ffe4ec,#be5270,#3a1523,#e7a2b3,#ffe4ec); --w1:#e8a0b2; --w2:#fff1f5; --glow2:rgba(190,82,112,.4); --spin:30s; }

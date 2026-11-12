@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>RAIKEN® — Personal Progression System</title>
+		<meta name="description" content="RAIKEN — личная система прогресса, дисциплины, привычек и достижений." />
+		<meta name="theme-color" content="#05080d" />
+		<script>
+			try {
+				var t = localStorage.getItem("raiken.theme");
+				if (t && /^[a-z]+$/.test(t)) document.documentElement.dataset.theme = t;
+			} catch (e) {}
+		</script>
+		<link rel="manifest" href="manifest.webmanifest" />
+		<link rel="icon" type="image/svg+xml" href="icons/interface/favicon.svg" />
+		<link rel="apple-touch-icon" href="icons/app-192.png" />
+		<link rel="preload" href="fonts/exo-2-cyrillic-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="fonts/inter-tight-cyrillic-500-normal.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="stylesheet" href="css/fonts.css" />
+		<link rel="stylesheet" href="css/variables.css" />
+		<link rel="stylesheet" href="css/themes.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/ice.css" />
+		<link rel="stylesheet" href="css/frames.css" />
+		<link rel="stylesheet" href="css/look.css" />
+	</head>
+	<body>
+		<div id="app"></div>
+		<div id="ts"></div>
+		<script src="js/vendor/gsap.min.js"></script>
+		<script src="icons/interface/icons.js"></script>
+		<script src="js/ui/ice.js"></script>
+		<script src="js/ui/frames.js"></script>
+		<script src="js/ui/ambient.js"></script>
+		<script src="js/ui/themes.js"></script>
+		<script src="js/core/config.js"></script>
+		<script src="js/core/utils.js"></script>
+		<script src="js/core/ranks.js"></script>
+		<script src="js/core/state.js"></script>
+		<script src="js/core/engine.js"></script>
+		<script src="js/data/awards-data.js"></script>
+		<script src="js/features/insights.js"></script>
+		<script src="js/features/rituals.js"></script>
+		<script src="js/features/review.js"></script>
+		<script src="js/ui/assets.js"></script>
+		<script src="js/features/awards.js"></script>
+		<script src="js/features/quests.js"></script>
+		<script src="js/features/discipline.js"></script>
+		<script src="js/features/goals.js"></script>
+		<script src="js/features/tasks.js"></script>
+		<script src="js/features/calendar.js"></script>
+		<script src="js/features/ranks.js"></script>
+		<script src="js/features/backup.js"></script>
+		<script src="js/features/profile.js"></script>
+		<script src="js/ui/modals.js"></script>
+		<script src="js/ui/fx.js"></script>
+		<script src="js/ui/render.js"></script>
+		<script src="js/ui/events.js"></script>
+		<script src="js/core/scheduler.js"></script>
+		<script src="js/boot.js"></script>
+		<script>
+			if ("serviceWorker" in navigator && location.protocol !== "file:") {
+				addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+			}
+		</script>
+	</body>
+</html>

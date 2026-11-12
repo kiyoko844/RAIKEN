@@ -1,0 +1,51 @@
+/* RAIKEN · дизайн-токены. Это тема по умолчанию (Рукия, лёд).
+   Остальные темы переопределяют их в css/themes.css через html[data-theme="…"]. */
+:root {
+	color-scheme: dark;
+
+	/* основные цвета в виде «R G B» — для rgb(var(--c1) / 0.4) */
+	--c0: 5 8 13; /* фон */
+	--c1: 79 179 230; /* акцент */
+	--c2: 159 216 242; /* акцент светлый */
+	--cd: 31 108 153; /* акцент глубокий */
+	--cl: 234 246 255; /* самый светлый (заголовки, подсветка) */
+	--ck: 4 18 28; /* чернила на акценте (текст на кнопках) */
+	--cr: 255 92 108; /* негатив: штрафы, просрочки */
+	--cg: 111 227 193; /* позитив */
+
+	/* для старых стилей: оттенок и насыщенность акцентных цветов и поверхностей */
+	--hue: 201;
+	--sat: 1;
+	--hue-s: 210;
+	--sat-s: 1;
+
+	--bg: #05080d;
+	--b2: #0a1119;
+	--sf: #0e1822;
+	--sf2: #16222f;
+	--ln: #1b2a38;
+	--gr: #2c4254;
+	--tx: #eaf6ff;
+	--t2: #8fa9ba;
+	--sv: #c9d6e2;
+	--gold: #e3c27a;
+	--ac: rgb(var(--c1));
+	--ac2: rgb(var(--c2));
+	--ok: rgb(var(--cg));
+	--rd: rgb(var(--cr));
+	--i1: rgb(var(--c1));
+	--i2: rgb(var(--c2));
+	--i3: rgb(var(--cl));
+	--glow: rgb(var(--c1) / 0.38);
+	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--cxc-f-cond: "Exo 2", "Inter Tight", system-ui, sans-serif;
+	--cxc-f-serif: "Inter Tight", system-ui, sans-serif;
+	--cxc-f-pixel: "IBM Plex Mono", monospace;
+	--h: var(--cxc-f-cond);
+	--b: "Inter Tight", system-ui, sans-serif;
+	--m: "IBM Plex Mono", ui-monospace, monospace;
+	--g: linear-gradient(135deg, rgb(var(--c2)), rgb(var(--c1)));
+	box-sizing: border-box;
+	padding-top: env(safe-area-inset-top, 0px);
+	padding-bottom: env(safe-area-inset-bottom, 0px);
+}
